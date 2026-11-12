@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Confirm your email · Lexino</title>
+</head>
+<body style="margin:0;padding:0;background:#c4e9ff;">
+  <!-- preview text shown in the inbox list -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">One tap to confirm your email and start using Lexino.</div>
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#c4e9ff;padding:32px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
+        <tr><td align="center" style="padding:0 0 18px;font-family:'Trebuchet MS',Verdana,Arial,sans-serif;font-size:30px;font-weight:800;color:#26264f;letter-spacing:.5px;">
+          Lexino
+        </td></tr>
+        <tr><td style="background:#fffaf0;border:3px solid #26264f;border-radius:28px;padding:34px 28px 30px;text-align:center;font-family:'Trebuchet MS',Verdana,Arial,sans-serif;">
+          <div style="font-size:54px;line-height:1;">👋</div>
+          <h1 style="margin:14px 0 10px;font-size:26px;line-height:1.25;color:#26264f;">Welcome to Lexino!</h1>
+          <p style="margin:0 0 24px;font-size:16px;line-height:1.55;color:#6b6b8d;">
+            Thanks for signing up. Tap the button below to confirm your email address and finish creating your account.
+          </p>
+          <a href="{{ .ConfirmationURL }}"
+             style="display:inline-block;background:#ff6b57;color:#ffffff;text-decoration:none;font-size:17px;font-weight:800;padding:15px 34px;border-radius:999px;border:3px solid #26264f;">
+            Confirm my email
+          </a>
+          <p style="margin:26px 0 0;font-size:13px;line-height:1.5;color:#6b6b8d;">
+            Button not working? Copy this link into your browser:<br>
+            <span style="word-break:break-all;color:#26264f;">{{ .ConfirmationURL }}</span>
+          </p>
+        </td></tr>
+        <tr><td align="center" style="padding:20px 10px 0;font-family:'Trebuchet MS',Verdana,Arial,sans-serif;font-size:12px;line-height:1.5;color:#4a5a7a;">
+          Lexino helps children with speech delays practise at home, alongside their speech therapist.<br>
+          If you didn’t create an account, you can safely ignore this email.
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>
