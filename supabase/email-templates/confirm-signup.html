@@ -1,41 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
   <title>Confirm your email · Lexino</title>
+  <!--
+    Supabase → Authentication → Emails → "Confirm signup".
+    Subject:  Confirm your email for Lexino
+    The logo is loaded from {{ .SiteURL }}/icon-192.png (public/icon-192.png), so
+    Site URL must be your deployed Lexino address, not localhost.
+  -->
+  <style>
+    body, table, td, a { -webkit-text-size-adjust:100%; -ms-text-size-adjust:100%; }
+    table, td { mso-table-lspace:0; mso-table-rspace:0; }
+    img { border:0; outline:none; text-decoration:none; -ms-interpolation-mode:bicubic; }
+    a { color:#26264f; }
+    @media only screen and (max-width:520px) {
+      .card { padding:28px 20px 26px !important; }
+      .h1 { font-size:24px !important; }
+      .btn a { display:block !important; }
+    }
+  </style>
 </head>
-<body style="margin:0;padding:0;background:#c4e9ff;">
-  <!-- preview text shown in the inbox list -->
-  <div style="display:none;max-height:0;overflow:hidden;opacity:0;">One tap to confirm your email and start using Lexino.</div>
-  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#c4e9ff;padding:32px 12px;">
-    <tr><td align="center">
-      <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
-        <tr><td align="center" style="padding:0 0 18px;font-family:'Trebuchet MS',Verdana,Arial,sans-serif;font-size:30px;font-weight:800;color:#26264f;letter-spacing:.5px;">
-          Lexino
-        </td></tr>
-        <tr><td style="background:#fffaf0;border:3px solid #26264f;border-radius:28px;padding:34px 28px 30px;text-align:center;font-family:'Trebuchet MS',Verdana,Arial,sans-serif;">
-          <div style="font-size:54px;line-height:1;">👋</div>
-          <h1 style="margin:14px 0 10px;font-size:26px;line-height:1.25;color:#26264f;">Welcome to Lexino!</h1>
-          <p style="margin:0 0 24px;font-size:16px;line-height:1.55;color:#6b6b8d;">
-            Thanks for signing up. Tap the button below to confirm your email address and finish creating your account.
-          </p>
-          <a href="{{ .ConfirmationURL }}"
-             style="display:inline-block;background:#ff6b57;color:#ffffff;text-decoration:none;font-size:17px;font-weight:800;padding:15px 34px;border-radius:999px;border:3px solid #26264f;">
-            Confirm my email
-          </a>
-          <p style="margin:26px 0 0;font-size:13px;line-height:1.5;color:#6b6b8d;">
-            Button not working? Copy this link into your browser:<br>
-            <span style="word-break:break-all;color:#26264f;">{{ .ConfirmationURL }}</span>
-          </p>
-        </td></tr>
-        <tr><td align="center" style="padding:20px 10px 0;font-family:'Trebuchet MS',Verdana,Arial,sans-serif;font-size:12px;line-height:1.5;color:#4a5a7a;">
-          Lexino helps children with speech delays practise at home, alongside their speech therapist.<br>
-          If you didn’t create an account, you can safely ignore this email.
-        </td></tr>
-      </table>
-    </td></tr>
+<body style="margin:0;padding:0;background-color:#c4e9ff;">
+
+  <!-- Inbox preview text -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">
+    Welcome to Lexino! Confirm your email to start practising together.
+    &#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;&#847;&zwnj;&nbsp;
+  </div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#c4e9ff" style="background-color:#c4e9ff;">
+    <tr>
+      <td align="center" style="padding:32px 12px 40px;">
+
+        <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="max-width:520px;">
+
+          <!-- Brand header: mascot + wordmark -->
+          <tr>
+            <td align="center" style="padding:0 0 22px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td valign="middle" style="padding-right:12px;">
+                    <img src="{{ .SiteURL }}/icon-192.png" width="52" height="52" alt="Lexino"
+                         style="display:block;width:52px;height:52px;border-radius:14px;border:3px solid #26264f;background-color:#ffc83d;">
+                  </td>
+                  <td valign="middle" style="font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;font-size:34px;line-height:1;font-weight:800;letter-spacing:.5px;color:#26264f;">
+                    Lexino
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Card -->
+          <tr>
+            <td class="card" align="center" bgcolor="#fffaf0"
+                style="background-color:#fffaf0;border:3px solid #26264f;border-radius:28px;padding:0;font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;text-align:center;">
+
+              <!-- Sun-yellow banner -->
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td align="center" bgcolor="#ffc83d"
+                      style="background-color:#ffc83d;border-bottom:3px solid #26264f;border-radius:24px 24px 0 0;padding:14px 20px;font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;font-size:13px;line-height:1.3;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#26264f;">
+                    Confirm your email
+                  </td>
+                </tr>
+              </table>
+
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="card" align="center" style="padding:34px 32px 30px;font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;text-align:center;">
+
+                    <h1 class="h1" style="margin:0 0 12px;font-size:28px;line-height:1.25;font-weight:800;color:#26264f;">
+                      Welcome to Lexino! &#128075;
+                    </h1>
+                    <p style="margin:0 0 28px;font-size:16px;line-height:1.6;color:#6b6b8d;">
+                      You&rsquo;re one tap away from fun speech practice at home. Confirm your email address to finish creating your Lexino account.
+                    </p>
+
+                    <!-- Button -->
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" class="btn">
+                      <tr>
+                        <td align="center" bgcolor="#ff6b57" style="background-color:#ff6b57;border:3px solid #26264f;border-radius:999px;">
+                          <a href="{{ .ConfirmationURL }}" target="_blank"
+                             style="display:inline-block;padding:16px 40px;font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;font-size:18px;line-height:1.2;font-weight:800;color:#ffffff;text-decoration:none;border-radius:999px;">
+                            Confirm my email
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+
+                    <!-- Fallback link -->
+                    <p style="margin:28px 0 0;font-size:13px;line-height:1.55;color:#6b6b8d;">
+                      Button not working? Copy and paste this link into your browser:
+                    </p>
+                    <p style="margin:6px 0 0;font-size:12px;line-height:1.5;word-break:break-all;">
+                      <a href="{{ .ConfirmationURL }}" target="_blank" style="color:#26264f;text-decoration:underline;">{{ .ConfirmationURL }}</a>
+                    </p>
+                  </td>
+                </tr>
+
+                <!-- Divider + safety note -->
+                <tr>
+                  <td style="padding:0 32px;">
+                    <div style="height:2px;line-height:2px;font-size:2px;background-color:#ffd9a0;">&nbsp;</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="card" align="center" style="padding:20px 32px 26px;font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;font-size:13px;line-height:1.55;color:#6b6b8d;text-align:center;">
+                    <strong style="color:#26264f;">Didn&rsquo;t sign up?</strong>
+                    You can safely ignore this email &mdash; no account will be created without your confirmation.
+                  </td>
+                </tr>
+              </table>
+
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td align="center" style="padding:24px 16px 0;font-family:'Trebuchet MS','Segoe UI',Verdana,Arial,sans-serif;font-size:12px;line-height:1.6;color:#3d4e70;">
+              <strong style="color:#26264f;">Lexino</strong> &middot; Home practice for children with speech delays<br>
+              Made to support your child&rsquo;s speech therapist, not replace them.<br>
+              <span style="color:#5a6a8a;">You received this email because this address was used to sign up for Lexino.</span>
+            </td>
+          </tr>
+
+        </table>
+
+      </td>
+    </tr>
   </table>
 </body>
 </html>

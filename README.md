@@ -45,6 +45,14 @@ Without setup the app runs in **local mode** (data stays in the browser). To tur
 
 Events are queued offline and synced idempotently.
 
+### Branded confirmation email
+
+Supabase sends its own plain email until you change it in the dashboard:
+
+1. **Authentication → Emails → Confirm signup**: set the subject to `Confirm your email for Lexino` and paste in `supabase/email-templates/confirm-signup.html`.
+2. **Authentication → URL Configuration**: set **Site URL** to the deployed app address (the logo loads from `{{ .SiteURL }}/icon-192.png`, so `localhost` will show a broken image).
+3. **Project Settings → Authentication → SMTP Settings**: turn on custom SMTP (e.g. Resend, Brevo, Postmark) with sender name `Lexino` and an address on your own domain such as `hello@yourdomain.com`. Without this, the inbox shows `Supabase Auth <noreply@mail.app.supabase.io>`.
+
 ## Privacy
 
 - The microphone is **off by default** and only detects *that* the child made a sound. Nothing is recorded or stored; clarity is never judged.
