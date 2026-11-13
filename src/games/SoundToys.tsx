@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
-import { TOY_PACKS } from '../lib/content';
+import { CARD_BY_ID, TOY_PACKS } from '../lib/content';
+import { CardFace } from '../components/CardFace';
 import { playKey, preload, sfx, stopAudio } from '../lib/audio';
 import { logEvent } from '../lib/repo';
 import { ListenRing, useListen } from '../components/useListen';
@@ -48,7 +49,7 @@ function Toys({ pack }: { pack: string }) {
       <div className="grid grid--toys">
         {toys.map((t) => (
           <button key={t.id} type="button" className={`item ${active === t.id ? 'bounce' : ''}`} onClick={() => tap(t.id)} aria-label={t.name}>
-            <span className="emo">{t.emoji}</span>
+            <CardFace card={{ emoji: t.emoji, image: CARD_BY_ID[t.id]?.image, word: t.name }} />
           </button>
         ))}
       </div>
