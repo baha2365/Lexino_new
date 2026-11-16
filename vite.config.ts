@@ -76,7 +76,7 @@ export default defineConfig({
         globPatterns: ['**/*.{js,css,html,svg,png,woff2}'],
         runtimeCaching: [
           {
-            urlPattern: ({ url }) => /\/(audio|images)\//.test(url.pathname),
+            urlPattern: ({ url }) => /\/(audio|images|models)\//.test(url.pathname),
             handler: 'CacheFirst',
             options: { cacheName: 'lexino-media', expiration: { maxEntries: 800 } },
           },

@@ -4,6 +4,7 @@ import { playKey, sfx, stopAudio, preload } from '../lib/audio';
 import { logEvent } from '../lib/repo';
 import { sample, shuffle, wait, confettiAtElement } from '../lib/util';
 import { CardFace } from '../components/CardFace';
+import { Bear3D, bearCue } from '../components/Bear3D';
 import { Dots } from '../components/Dots';
 import { Finish } from '../components/Finish';
 
@@ -63,7 +64,7 @@ function makeRounds(mode: string): Round[] {
     const items = shuffle([...sample(good, 3), ...sample(bad, 2)]);
     return {
       items,
-      targets: [{ id: 'who', label: feed ? 'bear' : 'doll', node: <span className="target__emoji target__emoji--big">{feed ? '🐻' : '🪆'}</span> }],
+      targets: [{ id: 'who', label: feed ? 'bear' : 'doll', node: feed ? <Bear3D label="bear" /> : <span className="target__emoji target__emoji--big">🪆</span> }],
       accepts: Object.fromEntries(items.map((c) => [c.id, good.includes(c) ? 'who' : null])),
       hint: feed ? 'Feed the bear!' : 'Dress the doll!',
     };
@@ -139,7 +140,10 @@ function Board({ round, mode, onDone }: { round: Round; mode: string; onDone: ()
     const dy = e.clientY - drag.sy;
     const moved = drag.moved || Math.hypot(dx, dy) > 10;
     setDrag({ ...drag, dx, dy, moved });
-    if (moved) setHot(overTarget(drag.id));
+    if (moved) {
+      setHot(overTarget(drag.id));
+      if (mode === 'feed' && !drag.moved) bearCue('ask');
+    }
   }
   function up(e: React.PointerEvent) {
     if (!drag || e.pointerId !== drag.pid) return;
@@ -148,11 +152,13 @@ function Board({ round, mode, onDone }: { round: Round; mode: string; onDone: ()
     setDrag(null);
     setHot(null);
     if (!d.moved || !over) {
+      if (mode === 'feed') bearCue('idle');
       if (d.moved) { setBack(d.id); setTimeout(() => setBack(null), 420); }
       return;
     }
     if (round.accepts[d.id] === over) {
       sfx('yay');
+      if (mode === 'feed') bearCue('eat');
       confettiAtElement(targetEls.current[over] ?? null, 12);
       const w = wrongs[d.id] ?? 0;
       logEvent({ game: 'sort', skill: 'words', result: w ? 'assisted' : 'correct', cardId: d.id, meta: { mode, wrong: w } });
@@ -162,6 +168,7 @@ function Board({ round, mode, onDone }: { round: Round; mode: string; onDone: ()
       if (next.length >= needed) onDone();
     } else {
       sfx('boop');
+      if (mode === 'feed') bearCue('wrong');
       setWrongs((m) => ({ ...m, [d.id]: (m[d.id] ?? 0) + 1 }));
       setBack(d.id);
       setTimeout(() => setBack(null), 420);

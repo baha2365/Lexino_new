@@ -203,6 +203,8 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 800; margin: 0 0 8px
 .target.hot { transform: scale(1.08); background: #fff0c9; border-style: solid; }
 .target__emoji { font-size: clamp(54px, 10vh, 84px); line-height: 1; }
 .target__emoji--big { font-size: clamp(70px, 13vh, 110px); }
+.bear3d { display: block; width: clamp(110px, 20vh, 170px); height: clamp(100px, 17vh, 150px); pointer-events: none; }
+.bear3d__canvas { width: 100%; height: 100%; display: block; }
 .target__fx { position: absolute; top: -18px; right: -10px; font-size: 40px; animation: poptext .9s ease forwards; }
 
 /* ---- pairs */
