@@ -71,6 +71,13 @@ function makeRounds(mode: string): Round[] {
   });
 }
 
+/** Dragged card's look. In feed mode it shrinks and turns see-through while over the bear, so the bear stays visible. */
+function dragStyle(dx: number, dy: number, feed: boolean, overBear: boolean): React.CSSProperties {
+  if (!feed) return { transform: `translate(${dx}px, ${dy}px) scale(1.1) rotate(-3deg)` };
+  // individual props: position (translate) is applied outside scale, so shrinking keeps the card under the pointer
+  return { translate: `${dx}px ${dy}px`, rotate: '-3deg', scale: overBear ? '0.36' : '1.1', opacity: overBear ? 0.75 : 1, transition: 'scale .15s ease, opacity .15s ease' };
+}
+
 /* -------------------------------------------------------------------- game */
 
 export function Sort({ mode }: { mode: string }) {
@@ -92,7 +99,7 @@ export function Sort({ mode }: { mode: string }) {
   }
 
   return (
-    <div className="sort">
+    <div className={`sort ${mode === 'feed' ? 'sort--feed' : ''}`}>
       <Dots total={rounds.length} done={i} />
       <div className="prompt prompt--static"><span>{r.hint}</span></div>
       <Board key={`${mode}-${seed}-${i}`} round={r} mode={mode} onDone={roundDone} />
@@ -189,7 +196,7 @@ function Board({ round, mode, onDone }: { round: Round; mode: string; onDone: ()
               ref={(el) => { itemEls.current[c.id] = el; }}
               type="button"
               className={`item ${isDrag && drag?.moved ? 'dragging' : ''} ${back === c.id ? 'back' : ''} ${gone ? 'gone' : ''} ${hintFor === c.id && round.accepts[c.id] ? 'hint' : ''}`}
-              style={isDrag && drag?.moved ? { transform: `translate(${drag.dx}px, ${drag.dy}px) scale(1.1) rotate(-3deg)` } : undefined}
+              style={isDrag && drag?.moved ? dragStyle(drag.dx, drag.dy, mode === 'feed', hot !== null) : undefined}
               onPointerDown={(e) => down(e, c)}
               onPointerMove={move}
               onPointerUp={up}

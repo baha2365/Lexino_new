@@ -160,7 +160,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 800; margin: 0 0 8px
 .item.vanish { visibility: hidden; }
 .item.bounce { animation: bounce .5s ease; }
 .item.dragging { transition: none; z-index: 50; box-shadow: 0 16px 0 rgba(38,38,79,.28); touch-action: none; }
-.item.back { transition: transform .4s cubic-bezier(.34,1.56,.64,1); z-index: 50; }
+.item.back { transition: transform .4s cubic-bezier(.34,1.56,.64,1), translate .4s cubic-bezier(.34,1.56,.64,1), rotate .4s cubic-bezier(.34,1.56,.64,1), scale .4s cubic-bezier(.34,1.56,.64,1); z-index: 50; }
 .grid--sort .item { touch-action: none; cursor: grab; }
 .shake { animation: shake .4s ease; }
 @keyframes shake { 0%,100% { transform: translateX(0); } 20% { transform: translateX(-8px) rotate(-3deg); } 50% { transform: translateX(8px) rotate(3deg); } 80% { transform: translateX(-4px); } }
@@ -203,7 +203,7 @@ h1, h2, h3 { font-family: var(--font-display); font-weight: 800; margin: 0 0 8px
 .target.hot { transform: scale(1.08); background: #fff0c9; border-style: solid; }
 .target__emoji { font-size: clamp(54px, 10vh, 84px); line-height: 1; }
 .target__emoji--big { font-size: clamp(70px, 13vh, 110px); }
-.bear3d { display: block; width: clamp(110px, 20vh, 170px); height: clamp(100px, 17vh, 150px); pointer-events: none; }
+.bear3d { display: block; width: clamp(150px, 29vh, 260px); height: clamp(130px, 26vh, 235px); pointer-events: none; }
 .bear3d__canvas { width: 100%; height: 100%; display: block; }
 .target__fx { position: absolute; top: -18px; right: -10px; font-size: 40px; animation: poptext .9s ease forwards; }
 
@@ -383,3 +383,13 @@ textarea { width: 100%; resize: vertical; }
 .welcome__card p { margin: 0; color: var(--muted); font-weight: 700; line-height: 1.45; }
 .welcome__card a.pill { text-decoration: none; }
 .welcome__skip { color: var(--muted); font-weight: 800; font-size: 14px; }
+
+/* ---- feed the bear: bigger bear, food cards a touch smaller so the page height stays the same */
+.sort--feed { --card: clamp(96px, min(27vw, 21vh), 210px); }
+@media (max-width: 640px), (max-aspect-ratio: 1/1) {
+  .sort--feed { --card: clamp(88px, min(29vw, 19vh), 170px); }
+}
+@media (max-height: 520px) and (orientation: landscape) {
+  .sort--feed { --card: clamp(64px, 18vh, 100px); }
+  .bear3d { width: clamp(120px, 34vh, 170px); height: clamp(110px, 32vh, 160px); }
+}
